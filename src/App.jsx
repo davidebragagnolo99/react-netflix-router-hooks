@@ -1,32 +1,40 @@
-import { React } from "react";
-import "./App.scss";
-import FirstGallery from "./components/FirstGallery";
-import MyFooter from "./components/MyFooter";
-import MyMain from "./components/MyMain";
-import MyNav from "./components/MyNav";
-import SecondGallery from "./components/SecondGallery";
-import ThirdGallery from "./components/ThirdGallery";
-import Settings from "./components/Settings";
-import Profile from "./components/Profile";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+import NetflixNavbar from "./MyComponents/NetflixNavbar";
+import NetflixMain from "./MyComponents/NetflixMain";
+import NetflixFooter from "./MyComponents/NetflixFooter";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import TvShows from "./components/TvShows";
-import NotFound from "./components/NotFound";
-import MovieDetails from "./components/MovieDetails";
+import SuperheroCarousel from "./MyComponents/SuperheroCarousel";
+import MovieDetails from "./MyComponents/MovieDetails";
+import ActionComedyCarousel from "./MyComponents/ActionComedyCarousel";
+import FantasyCarousel from "./MyComponents/FantasyCarousel";
+import Profile from "./MyComponents/Profile";
+import Settings from "./MyComponents/Settings";
 
 function App() {
   return (
-    <div className="App px-3">
+    <>
       <BrowserRouter>
-        <MyNav />
+        <NetflixNavbar />
         <Routes>
-          <Route path="/" element={<TvShows />} />
+          <Route path="/" element={<NetflixMain />} />
+          <Route
+            path="/tv-shows"
+            element={
+              <>
+                <SuperheroCarousel />
+                <ActionComedyCarousel />
+                <FantasyCarousel />
+              </>
+            }
+          />
+          <Route path="/movie-details/:movieID" element={<MovieDetails />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/settings" element={<Settings />} />
-          <Route path="/movie-details/:imdbID/" element={<MovieDetails />} />
-          <Route path="*" element={<NotFound />} />
         </Routes>
+        <NetflixFooter />
       </BrowserRouter>
-    </div>
+    </>
   );
 }
 
